@@ -38,9 +38,9 @@ For Gemini Live Agent Challenge
    - Device links successfully and can receive call notifications.
 
 ## Architecture Diagram
-- Mermaid source: `docs/architecture-diagram-hackathon.mmd`
-- PNG (submission-ready): `docs/architecture-diagram-hackathon.png`
-- SVG: `docs/architecture-diagram-hackathon.svg`
+- Mermaid source: [`docs/architecture-diagram-hackathon.mmd`](docs/architecture-diagram-hackathon.mmd)
+- PNG (submission-ready): [`docs/architecture-diagram-hackathon.png`](docs/architecture-diagram-hackathon.png)
+- SVG: [`docs/architecture-diagram-hackathon.svg`](docs/architecture-diagram-hackathon.svg)
 
 ## Security
 - CI secret scanning is enabled via GitHub Actions:
