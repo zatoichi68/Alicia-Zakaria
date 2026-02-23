@@ -1,0 +1,35 @@
+flowchart LR
+  subgraph Client["Client Layer"]
+    App["AlicIA & ZakarIA Web App (PWA)"]
+    Fam["Family Portal"]
+  end
+
+  subgraph Platform["Application Platform"]
+    Hosting["Firebase Hosting"]
+    API["Firebase Functions (/api/*)"]
+    Voice["Cloud Run voice-proxy (/voice)"]
+  end
+
+  subgraph Data["Data & Messaging"]
+    Firestore["Cloud Firestore\nconversation memory, calls, family links"]
+    FCM["Firebase Cloud Messaging"]
+  end
+
+  subgraph AI["AI Layer"]
+    Gemini["Gemini Live API\n2.5 Flash Native Audio"]
+  end
+
+  App --> Hosting
+  Fam --> Hosting
+
+  Hosting --> API
+  Hosting --> Voice
+  API --> Hosting
+
+  API --> Firestore
+  API --> FCM
+  FCM --> Fam
+
+  Voice --> Gemini
+  Voice --> App
+  App --> Voice

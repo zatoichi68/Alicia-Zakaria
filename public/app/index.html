@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+  <title>Alicia & Zakaria - v1.0.1</title>
+  <script>
+    (function () {
+      const params = new URLSearchParams(window.location.search);
+      const lang = params.get('lang') === 'en' ? 'en' : 'fr';
+      document.documentElement.lang = lang;
+      document.title = lang === 'en' ? 'Alicia & Zakaria App - v1.0.1' : 'Alicia & Zakaria - v1.0.1';
+    })();
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@300;400;600;700&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/app/theme-landing.css?v=darkfix2">
+  <script src="https://meet.jit.si/external_api.js"></script>
+  <script>
+    // Redirection immédiate via URL ou IndexedDB (Fix iOS PWA)
+    (function() {
+      const params = new URLSearchParams(window.location.search);
+      const room = params.get('room');
+      const hash = window.location.hash;
+
+      function goToJitsi(name) {
+        if (!name) return;
+        window.location.replace('https://meet.jit.si/' + name);
+      }
+
+      if (hash.indexOf('#join=') === 0) {
+        goToJitsi(hash.replace('#join=', ''));
+      } else if (params.get('mode') === 'jitsi' && room) {
+        goToJitsi(room);
+      } else {
+        // Vérification IndexedDB pour les notifications iOS
+        try {
+          const req = indexedDB.open('AliciaZakariaDB', 1);
+          req.onsuccess = function(e) {
+            const db = e.target.result;
+            if (!db.objectStoreNames.contains('calls')) return;
+            const tx = db.transaction('calls', 'readwrite');
+            const store = tx.objectStore('calls');
+            const getReq = store.get('pending_room');
+            getReq.onsuccess = function() {
+              if (getReq.result) {
+                const pendingRoom = getReq.result;
+                store.delete('pending_room'); // Nettoyage immédiat
+                goToJitsi(pendingRoom);
+              }
+            };
+          };
+        } catch(e) {}
+      }
+    })();
+  </script>
+  <script type="module" crossorigin src="/app/assets/index-BVaTGwHT.js"></script>
+  <link rel="stylesheet" crossorigin href="/app/assets/index-DpDycZsL.css">
+</head>
+
+<body class="h-screen overflow-hidden">
+  <div id="root" class="h-full w-full"></div>
+</body>
+
+</html>

@@ -1,0 +1,35 @@
+{
+  "hosting": {
+    "site": "alicia-zakaria",
+    "public": "public",
+    "trailingSlash": true,
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "/voice",
+        "run": {
+          "serviceId": "voice-proxy",
+          "region": "us-central1"
+        }
+      },
+      {
+        "source": "/api/**",
+        "function": "api"
+      },
+      {
+        "source": "/app/**",
+        "destination": "/app/index.html"
+      }
+    ]
+  },
+  "functions": {
+    "source": "functions"
+  },
+  "firestore": {
+    "rules": "firestore.rules"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "name": "voice-proxy",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "main": "index.js",
+  "engines": {
+    "node": "20"
+  },
+  "dependencies": {
+    "@google/genai": "^1.39.0",
+    "ws": "^8.18.3"
+  }
+}

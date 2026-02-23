@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AlicIA and ZakarIA | AI Companion for Seniors</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@300;400;600;700&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --warm-cream: #fbf7f0;
+      --soft-terracotta: #e8a87c;
+      --deep-terracotta: #d4773c;
+      --sage-green: #9caf88;
+      --deep-teal: #4a7c7e;
+      --warm-grey: #5a5a5a;
+      --light-grey: #f4f1ec;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--warm-cream);
+      color: var(--warm-grey);
+      line-height: 1.7;
+    }
+    h1, h2, h3 { font-family: 'Crimson Pro', serif; }
+    nav {
+      position: sticky;
+      top: 0;
+      background: rgba(251, 247, 240, 0.95);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid rgba(212, 119, 60, 0.15);
+      z-index: 10;
+    }
+    .nav-wrap {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 1rem 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+    }
+    .logo {
+      font-size: 1.5rem;
+      color: var(--deep-teal);
+      text-decoration: none;
+      font-weight: 700;
+    }
+    .nav-links {
+      display: flex;
+      list-style: none;
+      gap: 1rem;
+      align-items: center;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+    .nav-links a {
+      text-decoration: none;
+      color: var(--warm-grey);
+      font-weight: 500;
+    }
+    .btn {
+      background: var(--deep-terracotta);
+      color: #fff !important;
+      padding: .65rem 1rem;
+      border-radius: 999px;
+      box-shadow: 0 5px 20px rgba(212, 119, 60, .25);
+    }
+    .hero {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 5rem 1.5rem 3rem;
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 2rem;
+      align-items: center;
+    }
+    .badge {
+      display: inline-block;
+      background: linear-gradient(135deg, var(--sage-green), var(--deep-teal));
+      color: #fff;
+      padding: .45rem .9rem;
+      border-radius: 999px;
+      margin-bottom: 1rem;
+      font-weight: 700;
+      font-size: .9rem;
+    }
+    .hero h1 {
+      font-size: clamp(2rem, 5vw, 4rem);
+      line-height: 1.12;
+      color: var(--deep-teal);
+      margin-bottom: 1rem;
+    }
+    .hero p { font-size: 1.1rem; margin-bottom: 1.25rem; }
+    .hero-actions { display: flex; gap: .8rem; flex-wrap: wrap; }
+    .hero-actions a {
+      text-decoration: none;
+      border-radius: 999px;
+      padding: .9rem 1.35rem;
+      font-weight: 700;
+    }
+    .primary { background: var(--deep-terracotta); color: #fff; }
+    .secondary { border: 2px solid var(--deep-teal); color: var(--deep-teal); }
+    .cards { display: grid; gap: 1rem; }
+    .card {
+      background: #fff;
+      padding: 1.25rem;
+      border-radius: 18px;
+      border-left: 4px solid var(--soft-terracotta);
+      box-shadow: 0 10px 30px rgba(0,0,0,.05);
+    }
+    .card:nth-child(2){ border-left-color: var(--sage-green); }
+    .card:nth-child(3){ border-left-color: var(--deep-teal); }
+    .num { font-size: 2rem; color: var(--deep-terracotta); font-weight: 700; font-family: 'Crimson Pro', serif; }
+    .section {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 3rem 1.5rem;
+    }
+    .contact-form {
+      background: #fff;
+      padding: 2rem;
+      border-radius: 20px;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.05);
+      margin-top: 1rem;
+    }
+    .form-group {
+      margin-bottom: 1rem;
+    }
+    .form-group label {
+      display: block;
+      margin-bottom: 0.4rem;
+      color: var(--warm-grey);
+      font-weight: 600;
+    }
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      padding: 0.9rem 1rem;
+      border: 2px solid #e8e8e8;
+      border-radius: 12px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 1rem;
+    }
+    .form-group input:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: var(--soft-terracotta);
+      box-shadow: 0 0 0 4px rgba(232, 168, 124, 0.1);
+    }
+    .form-group textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
+    .submit-btn {
+      width: 100%;
+      border: none;
+      background: var(--deep-terracotta);
+      color: #fff;
+      padding: 1rem;
+      border-radius: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 6px 20px rgba(212, 119, 60, 0.25);
+    }
+    .submit-btn:hover {
+      background: var(--soft-terracotta);
+    }
+    .section h2 { font-size: clamp(1.7rem, 3vw, 2.8rem); color: var(--deep-teal); margin-bottom: .75rem; }
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1rem;
+      margin-top: 1.25rem;
+    }
+    .feature {
+      background: #fff;
+      border-radius: 20px;
+      padding: 1.25rem;
+      box-shadow: 0 10px 24px rgba(0,0,0,.04);
+    }
+    .problem {
+      background: var(--deep-teal);
+      color: #fff;
+      border-radius: 24px;
+      padding: 2rem;
+    }
+    .problem strong { color: var(--soft-terracotta); }
+    footer {
+      padding: 2rem 1.5rem;
+      text-align: center;
+      color: #fff;
+      background: var(--warm-grey);
+      margin-top: 2rem;
+    }
+    @media (max-width: 900px) {
+      .hero { grid-template-columns: 1fr; padding-top: 3rem; }
+      .nav-wrap { flex-direction: column; align-items: flex-start; }
+      .nav-links { justify-content: flex-start; }
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="nav-wrap">
+      <a href="#" class="logo">AlicIA &amp; ZakarIA</a>
+      <ul class="nav-links">
+        <li><a href="#features">Features</a></li>
+        <li><a href="#problem">The Challenge</a></li>
+        <li><a href="/app/?lang=en">Try the App</a></li>
+        <li><a href="/" aria-label="French version">FR</a></li>
+        <li><a href="#contact" class="btn">Become a Partner</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <div>
+      <span class="badge">Launching in Quebec in 2026</span>
+      <h1>A caring AI companion for older adults</h1>
+      <p>AlicIA and ZakarIA reduce social isolation in senior residences with empathetic conversations, family-friendly calls, and simple daily support.</p>
+      <div class="hero-actions">
+        <a href="/app/?lang=en" class="primary">Try the MVP</a>
+        <a href="#contact" class="secondary">Book a Demo</a>
+      </div>
+    </div>
+    <div class="cards">
+      <div class="card">
+        <div class="num">20%</div>
+        <p>of seniors report persistent loneliness</p>
+      </div>
+      <div class="card">
+        <div class="num">140K</div>
+        <p>seniors live in private residences in Quebec</p>
+      </div>
+      <div class="card">
+        <div class="num">24/7</div>
+        <p>AlicIA and ZakarIA are always available</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="features" class="section">
+    <h2>Technology designed for dignity and comfort</h2>
+    <p>Built to be warm, accessible, and useful for residents, families, and care teams.</p>
+    <div class="features">
+      <article class="feature">
+        <h3>Empathetic Conversation</h3>
+        <p>Natural dialogue in French and English with a calm, reassuring tone.</p>
+      </article>
+      <article class="feature">
+        <h3>Family Connection</h3>
+        <p>Simple video calling and notifications to keep loved ones close.</p>
+      </article>
+      <article class="feature">
+        <h3>Cognitive Activities</h3>
+        <p>Games, music, local news, and guided daily routines.</p>
+      </article>
+      <article class="feature">
+        <h3>Voice-first Interface</h3>
+        <p>Large controls and voice support for low-tech confidence.</p>
+      </article>
+    </div>
+  </section>
+
+  <section id="problem" class="section">
+    <div class="problem">
+      <h2>The Challenge</h2>
+      <p>Loneliness in later life is a health and dignity issue. <strong>AlicIA and ZakarIA</strong> help create moments of connection every day.</p>
+      <p>Our approach supports residents, families, and staff with practical, human-centered AI.</p>
+    </div>
+  </section>
+
+  <section id="contact" class="section">
+    <h2>Let's plan a demo</h2>
+    <p>We are looking for senior residences in Quebec for our first 2026 deployments.</p>
+    <form class="contact-form" action="https://formspree.io/f/mjgoozow" method="POST">
+      <div class="form-group">
+        <label for="name">Full name</label>
+        <input type="text" id="name" name="name" required>
+      </div>
+      <div class="form-group">
+        <label for="email">Professional email</label>
+        <input type="email" id="email" name="email" required>
+      </div>
+      <div class="form-group">
+        <label for="residence">Residence name (optional)</label>
+        <input type="text" id="residence" name="residence">
+      </div>
+      <div class="form-group">
+        <label for="message">Message</label>
+        <textarea id="message" name="message" required></textarea>
+      </div>
+      <button type="submit" class="submit-btn">Send my request</button>
+    </form>
+  </section>
+
+  <footer>
+    <p>AlicIA &amp; ZakarIA • Human-centered AI for senior wellbeing</p>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AlicIA et ZakarIA | Compagnon IA pour nos aînés</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@300;400;600;700&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --warm-cream: #FBF7F0;
+            --soft-terracotta: #E8A87C;
+            --deep-terracotta: #D4773C;
+            --sage-green: #9CAF88;
+            --deep-teal: #4A7C7E;
+            --warm-grey: #5A5A5A;
+            --light-grey: #F4F1EC;
+            --accent-coral: #F2937E;
+        }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--warm-cream);
+            color: var(--warm-grey);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Crimson Pro', serif;
+            font-weight: 600;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(251, 247, 240, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1.5rem 0;
+            border-bottom: 1px solid rgba(212, 119, 60, 0.1);
+            animation: slideDown 0.6s ease-out;
+        }
+
+        @keyframes slideDown {
+            from {
+                transform: translateY(-100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Crimson Pro', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--deep-teal);
+            text-decoration: none;
+            letter-spacing: -0.5px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--warm-grey);
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--soft-terracotta);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .btn-cta {
+            background: var(--deep-terracotta);
+            color: white;
+            padding: 0.75rem 1.75rem;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(212, 119, 60, 0.2);
+        }
+
+        .btn-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px rgba(212, 119, 60, 0.3);
+            background: var(--soft-terracotta);
+        }
+
+        /* Hero Section */
+        .hero {
+            margin-top: 80px;
+            padding: 8rem 2rem 6rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-content {
+            animation: fadeInUp 0.8s ease-out 0.2s backwards;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .launch-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--sage-green), var(--deep-teal));
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 2rem;
+            animation: fadeInUp 0.8s ease-out backwards;
+        }
+
+        h1 {
+            font-size: 4.5rem;
+            line-height: 1.1;
+            color: var(--deep-teal);
+            margin-bottom: 1.5rem;
+            animation: fadeInUp 0.8s ease-out 0.3s backwards;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: var(--warm-grey);
+            margin-bottom: 2.5rem;
+            line-height: 1.8;
+            animation: fadeInUp 0.8s ease-out 0.4s backwards;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1.5rem;
+            animation: fadeInUp 0.8s ease-out 0.5s backwards;
+        }
+
+        .btn-primary {
+            background: var(--deep-terracotta);
+            color: white;
+            padding: 1rem 2.5rem;
+            border-radius: 35px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.05rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 6px 20px rgba(212, 119, 60, 0.25);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(212, 119, 60, 0.35);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--deep-teal);
+            padding: 1rem 2.5rem;
+            border-radius: 35px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.05rem;
+            border: 2px solid var(--deep-teal);
+            transition: all 0.3s ease;
+        }
+
+        .btn-secondary:hover {
+            background: var(--deep-teal);
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        /* Stats Cards */
+        .stats-visual {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+            animation: fadeInUp 0.8s ease-out 0.6s backwards;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.05);
+            border-left: 5px solid var(--soft-terracotta);
+            transition: all 0.3s ease;
+        }
+
+        .stat-card:nth-child(2) {
+            border-left-color: var(--sage-green);
+        }
+
+        .stat-card:nth-child(3) {
+            border-left-color: var(--deep-teal);
+        }
+
+        .stat-card:hover {
+            transform: translateX(10px);
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.08);
+        }
+
+        .stat-number {
+            font-family: 'Crimson Pro', serif;
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--deep-terracotta);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-card:nth-child(2) .stat-number {
+            color: var(--sage-green);
+        }
+
+        .stat-card:nth-child(3) .stat-number {
+            color: var(--deep-teal);
+        }
+
+        .stat-label {
+            font-size: 1.05rem;
+            color: var(--warm-grey);
+            margin-bottom: 0.3rem;
+        }
+
+        .stat-source {
+            font-size: 0.85rem;
+            color: #999;
+            font-style: italic;
+        }
+
+        /* Features Section */
+        .features {
+            padding: 6rem 2rem;
+            background: linear-gradient(180deg, var(--warm-cream) 0%, var(--light-grey) 100%);
+        }
+
+        .section-header {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 5rem;
+        }
+
+        .section-header h2 {
+            font-size: 3.5rem;
+            color: var(--deep-teal);
+            margin-bottom: 1.5rem;
+        }
+
+        .section-header p {
+            font-size: 1.2rem;
+            color: var(--warm-grey);
+        }
+
+        .features-grid {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2.5rem;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 3rem 2.5rem;
+            border-radius: 25px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.04);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--soft-terracotta), var(--sage-green));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s ease;
+        }
+
+        .feature-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            display: block;
+        }
+
+        .feature-card h3 {
+            font-size: 1.6rem;
+            color: var(--deep-teal);
+            margin-bottom: 1rem;
+        }
+
+        .feature-card p {
+            font-size: 1.05rem;
+            color: var(--warm-grey);
+            line-height: 1.7;
+        }
+
+        /* Problem Section */
+        .problem {
+            padding: 6rem 2rem;
+            background: var(--deep-teal);
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .problem-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .problem h2 {
+            font-size: 3.5rem;
+            margin-bottom: 2rem;
+            color: white;
+        }
+
+        .problem p {
+            font-size: 1.3rem;
+            line-height: 1.9;
+            margin-bottom: 1.5rem;
+            opacity: 0.95;
+        }
+
+        .problem-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 3rem;
+            margin-top: 4rem;
+        }
+
+        .problem-stat {
+            text-align: center;
+        }
+
+        .problem-stat-number {
+            font-family: 'Crimson Pro', serif;
+            font-size: 4rem;
+            font-weight: 700;
+            color: var(--soft-terracotta);
+            margin-bottom: 0.5rem;
+        }
+
+        .problem-stat-label {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 6rem 2rem;
+            background: var(--warm-cream);
+        }
+
+        .contact-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .contact h2 {
+            font-size: 3.5rem;
+            color: var(--deep-teal);
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .contact > p {
+            text-align: center;
+            font-size: 1.2rem;
+            color: var(--warm-grey);
+            margin-bottom: 3rem;
+        }
+
+        .contact-form {
+            background: white;
+            padding: 3rem;
+            border-radius: 25px;
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.06);
+        }
+
+        .form-group {
+            margin-bottom: 2rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--warm-grey);
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem 1.5rem;
+            border: 2px solid #E8E8E8;
+            border-radius: 12px;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--soft-terracotta);
+            box-shadow: 0 0 0 4px rgba(232, 168, 124, 0.1);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .submit-btn {
+            width: 100%;
+            background: var(--deep-terracotta);
+            color: white;
+            padding: 1.25rem;
+            border: none;
+            border-radius: 12px;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 6px 20px rgba(212, 119, 60, 0.25);
+        }
+
+        .submit-btn:hover {
+            background: var(--soft-terracotta);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(212, 119, 60, 0.35);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--warm-grey);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        footer p {
+            opacity: 0.9;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .hero-container {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            h1 {
+                font-size: 3.5rem;
+            }
+
+            .features-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .problem-stats {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            .section-header h2 {
+                font-size: 2.5rem;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+            }
+
+            .problem h2 {
+                font-size: 2.5rem;
+            }
+        }
+
+        /* Scroll animations */
+        .fade-in-up {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+
+        /* Video Section */
+        .more-info {
+            padding: 8rem 2rem;
+            background: white;
+            text-align: center;
+        }
+
+        .video-container {
+            max-width: 1400px;
+            margin: 4rem auto 0;
+            aspect-ratio: 16/9;
+            border-radius: 40px;
+            overflow: hidden;
+            box-shadow: 0 30px 80px rgba(0,0,0,0.12);
+            border: 1px solid rgba(212, 119, 60, 0.1);
+        }
+
+        .video-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <a href="#" class="logo">AlicIA & ZakarIA</a>
+            <ul class="nav-links">
+                <li><a href="#features">Fonctionnalités</a></li>
+                <li><a href="#video">En savoir plus</a></li>
+                <li><a href="#problem">Le Défi</a></li>
+                <li><a href="/app/?lang=fr">Essayer MVP</a></li>
+                <li><a href="/en/">EN</a></li>
+                <li><a href="#contact" class="btn-cta">Devenir Partenaire</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-container">
+            <div class="hero-content">
+                <span class="launch-badge">🚀 Lancement 2026 au Québec</span>
+                <h1>Un compagnon IA bienveillant pour nos aînés</h1>
+                <p>AlicIA et ZakarIA combattent l'isolement social des personnes âgées en résidence grâce à une plateforme conversationnelle empathique, accessible 24/7.</p>
+                <div class="hero-buttons">
+                    <a href="/app/?lang=fr" class="btn-primary">Essayer le MVP (Beta)</a>
+                    <a href="#contact" class="btn-secondary">Planifier une Démo</a>
+                </div>
+            </div>
+            <div class="stats-visual">
+                <div class="stat-card">
+                    <div class="stat-number">20%</div>
+                    <div class="stat-label">des aînés ressentent de la solitude</div>
+                    <div class="stat-source">Source: Statistique Canada</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">140K</div>
+                    <div class="stat-label">aînés en résidence privée (RPA)</div>
+                    <div class="stat-source">Source: RQRA</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">24/7</div>
+                    <div class="stat-label">disponibilité AlicIA et ZakarIA</div>
+                    <div class="stat-source">Toujours présents</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Video Section -->
+    <section id="video" class="more-info">
+        <div class="section-header">
+            <h2>En savoir plus</h2>
+            <p>Découvrez comment Alicia et Zakaria transforment le quotidien de nos aînés à travers cette présentation.</p>
+        </div>
+        <div class="video-container fade-in-up">
+            <iframe 
+                src="https://www.youtube.com/embed/bA4r5AyiZVs" 
+                title="Présentation AlicIA et ZakarIA" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                referrerpolicy="strict-origin-when-cross-origin" 
+                allowfullscreen>
+            </iframe>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features">
+        <div class="section-header">
+            <h2>Une technologie au service du bien-être</h2>
+            <p>Des fonctionnalités conçues avec empathie pour améliorer la qualité de vie des aînés.</p>
+        </div>
+        <div class="features-grid">
+            <div class="feature-card fade-in-up">
+                <span class="feature-icon">💬</span>
+                <h3>Conversation Empathique</h3>
+                <p>IA conversationnelle avancée capable de dialogues naturels, réconfortants et engageants en français québécois.</p>
+            </div>
+            <div class="feature-card fade-in-up">
+                <span class="feature-icon">👩‍👩‍👧‍B</span>
+                <h3>Connexion Famille</h3>
+                <p>Appels vidéo simplifiés, partage de photos et messagerie avec les proches en quelques clics.</p>
+            </div>
+            <div class="feature-card fade-in-up">
+                <span class="feature-icon">🎯</span>
+                <h3>Activités Engageantes</h3>
+                <p>Jeux cérébraux, musique, nouvelles locales et activités de réminiscence personnalisées.</p>
+            </div>
+            <div class="feature-card fade-in-up">
+                <span class="feature-icon">🔔</span>
+                <h3>Rappels Bienveillants</h3>
+                <p>Rappels de rendez-vous, d'activités et vérifications quotidiennes de bien-être.</p>
+            </div>
+            <div class="feature-card fade-in-up">
+                <span class="feature-icon">🎤</span>
+                <h3>Interface Vocale</h3>
+                <p>Commandes vocales intuitives, idéales pour les aînés moins à l'aise avec la technologie.</p>
+            </div>
+            <div class="feature-card fade-in-up">
+                <span class="feature-icon">🔒</span>
+                <h3>Sécurisé & Éthique</h3>
+                <p>Conforme à la Loi 25. Vos données restent privées et sécurisées au Québec.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Problem Section -->
+    <section id="problem" class="problem">
+        <div class="problem-container">
+            <h2>Le défi de l'isolement</h2>
+            <p>Le Québec fait face à un vieillissement accéléré de sa population. En 2026, les 65+ représentent 23% de la population. L'isolement social augmente les risques pour la santé physique et mentale de nos aînés.</p>
+            <p>AlicIA et ZakarIA offrent une présence constante et bienveillante, complémentaire aux soins humains, pour que chaque aîné se sente écouté et connecté.</p>
+            <div class="problem-stats">
+                <div class="problem-stat">
+                    <div class="problem-stat-number">2.3M</div>
+                    <div class="problem-stat-label">Québécois de 65+ ans en 2031</div>
+                </div>
+                <div class="problem-stat">
+                    <div class="problem-stat-number">60%</div>
+                    <div class="problem-stat-label">Augmentation de la solitude post-COVID</div>
+                </div>
+                <div class="problem-stat">
+                    <div class="problem-stat-number">10%</div>
+                    <div class="problem-stat-label">des aînés vivent en résidence</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="contact-container">
+            <h2>Planifions une démo</h2>
+            <p>Nous recherchons des résidences pour aînés au Québec pour nos premiers déploiements en 2026.</p>
+            <form class="contact-form" action="https://formspree.io/f/mjgoozow" method="POST">
+                <div class="form-group">
+                    <label for="name">Nom complet</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Courriel professionnel</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="residence">Nom de la Résidence (optionnel)</label>
+                    <input type="text" id="residence" name="residence">
+                </div>
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea id="message" name="message" required></textarea>
+                </div>
+                <button type="submit" class="submit-btn">Envoyer ma demande</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2026 AlicIA et ZakarIA. Tous droits réservés. | Une initiative d'Alicia et Zakaria Inc.</p>
+    </footer>
+
+    <script>
+        // Scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in-up').forEach(el => observer.observe(el));
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const href = this.getAttribute('href');
+                if (href.startsWith('#')) {
+                    e.preventDefault();
+                    const target = document.querySelector(href);
+                    if (target) {
+                        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>

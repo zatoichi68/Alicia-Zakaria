@@ -1,0 +1,10 @@
+.env
+.env.local
+functions/.env
+mvp/.env.local
+node_modules
+functions/node_modules
+mvp/node_modules
+voice-proxy/node_modules
+.DS_Store
+firebase-debug*.log

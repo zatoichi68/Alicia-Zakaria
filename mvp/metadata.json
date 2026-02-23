@@ -1,0 +1,8 @@
+{
+  "name": "Alicia",
+  "description": "Alicia - Tablette compagnon IA pour aînés en résidence au Québec, conçue pour briser l'isolement social.",
+  "requestFramePermissions": [
+    "microphone",
+    "camera"
+  ]
+}
