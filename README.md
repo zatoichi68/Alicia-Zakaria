@@ -7,6 +7,9 @@ For Gemini Live Agent Challenge
 - App (FR): https://alicia-zakaria.web.app/app/?lang=fr
 - App (EN): https://alicia-zakaria.web.app/app/?lang=en
 
+## Quick screen recording that shows the behind-the-scenes of their app running on GCP
+<img width="593" height="876" alt="Capture d’écran, le 2026-03-12 à 11 34 07" src="https://github.com/user-attachments/assets/5cb14a02-be67-47ef-92cb-7a2f8081913e" />
+
 ## How Judges Can Test
 1. Open the app in English:
    - https://alicia-zakaria.web.app/app/?lang=en
